@@ -1,0 +1,91 @@
+
+body, html {
+  margin: 0;
+  padding: 0;
+  direction: rtl;
+  font-family: 'Heebo', sans-serif;
+  overflow-x: hidden;
+}
+
+.hero {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  overflow: hidden;
+}
+
+#background-video {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+  z-index: -1;
+}
+
+.overlay {
+  background: rgba(0,0,0,0.5);
+  color: white;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+h1 {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  transition: opacity 1s ease-in-out;
+}
+
+.btn {
+  background-color: #D4AFB9;
+  color: white;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.btn:hover {
+  background-color: #b98e9c;
+}
+
+/* טיפולי פנים ובוטוקס */
+.treatments {
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+  transition: background-image 1s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  position: relative;
+}
+
+.treatments::after {
+  content: "";
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.treatments-content {
+  position: relative;
+  text-align: center;
+  z-index: 1;
+}
+
+.treatments-content h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.treatments-content p {
+  font-size: 1.2rem;
+}
