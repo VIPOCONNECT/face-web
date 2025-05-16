@@ -1,0 +1,343 @@
+/*
+ * responsive.css - התאמות רספונסיביות לפי גודל מסך
+ * עם שימוש בגישת mobile-first
+ */
+
+/* נקודות מפנה סטנדרטיות:
+ * - מובייל: 0-767px
+ * - טאבלט: 768px-1023px
+ * - מחשב נייד: 1024px-1439px
+ * - מחשב שולחני: 1440px+
+ */
+
+/* ----- בסיס (מובייל) ----- */
+
+/* מסך פתיחה מותאם למובייל */
+.splash-container {
+  width: 100%;
+  padding: var(--spacing-6) var(--spacing-4);
+}
+
+.logo {
+  width: 6rem;
+  height: 6rem;
+  font-size: 3rem;
+}
+
+.app-title {
+  font-size: var(--font-size-3xl);
+}
+
+.tagline {
+  font-size: var(--font-size-lg);
+}
+
+/* התקדמות מותאמת למובייל */
+.progress-bar-container {
+  overflow-x: auto;
+  padding-bottom: var(--spacing-4);
+}
+
+.progress-bar {
+  min-width: 500px; /* מבטיח שכל האינדיקטורים יהיו גלויים */
+}
+
+/* מערכת שלבים מותאמת למובייל */
+.steps-navigation {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: white;
+  box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+  padding: var(--spacing-3) var(--spacing-4);
+  z-index: 10;
+}
+
+#steps-container {
+  padding-bottom: 80px; /* מרווח עבור סרגל הניווט הקבוע */
+}
+
+/* ניהול שקפים - ממשק מובייל */
+.slide-management {
+  flex-direction: column;
+}
+
+.slides-panel {
+  width: 100%;
+  height: 140px;
+  margin-bottom: var(--spacing-4);
+}
+
+.slides-list {
+  display: flex;
+  flex-direction: row;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: var(--spacing-2);
+}
+
+.slide-thumbnail {
+  min-width: 150px;
+  max-width: 150px;
+  margin-right: var(--spacing-2);
+}
+
+.slide-tools {
+  width: 100%;
+  margin-top: var(--spacing-4);
+}
+
+/* עורך תוכן - ממשק מובייל */
+.content-editor {
+  flex-direction: column;
+}
+
+.content-panel {
+  width: 100%;
+  margin-bottom: var(--spacing-4);
+}
+
+.element-properties {
+  width: 100%;
+  margin-top: var(--spacing-4);
+}
+
+.editor-preview {
+  height: 300px;
+}
+
+/* כלים מותאמים למובייל */
+.tools-row {
+  justify-content: center;
+}
+
+.tool-button {
+  width: 48px;
+  height: 48px;
+}
+
+/* ----- טאבלט (768px+) ----- */
+@media (min-width: 768px) {
+  .logo {
+    width: 7rem;
+    height: 7rem;
+    font-size: 3.5rem;
+  }
+  
+  .progress-bar {
+    min-width: 0;
+  }
+  
+  /* ניהול שקפים - ממשק טאבלט */
+  .slide-management {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  
+  .slides-panel {
+    width: 30%;
+    height: auto;
+    min-height: 300px;
+  }
+  
+  .slide-preview {
+    width: 65%;
+  }
+  
+  .slide-tools {
+    width: 100%;
+    margin-top: var(--spacing-4);
+  }
+  
+  /* עורך תוכן - ממשק טאבלט */
+  .content-editor {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  
+  .content-panel {
+    width: 30%;
+    margin-bottom: 0;
+  }
+  
+  .editor-preview {
+    width: 65%;
+    height: auto;
+    min-height: 300px;
+  }
+  
+  .element-properties {
+    width: 100%;
+    margin-top: var(--spacing-4);
+  }
+}
+
+/* ----- מחשב נייד (1024px+) ----- */
+@media (min-width: 1024px) {
+  /* מסך פתיחה - התאמה למסך גדול */
+  .app-title {
+    font-size: var(--font-size-4xl);
+  }
+  
+  .tagline {
+    font-size: var(--font-size-xl);
+  }
+  
+  .actions-container {
+    flex-direction: row;
+    justify-content: center;
+  }
+  
+  /* סרגל ניווט בתחתית */
+  .steps-navigation {
+    position: static;
+    box-shadow: none;
+    padding: var(--spacing-4) 0;
+  }
+  
+  #steps-container {
+    padding-bottom: var(--spacing-6);
+  }
+  
+  /* ניהול שקפים - ממשק מחשב */
+  .slides-panel {
+    width: 220px;
+  }
+  
+  .slides-list {
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
+    height: 100%;
+  }
+  
+  .slide-thumbnail {
+    min-width: initial;
+    max-width: initial;
+    margin-right: 0;
+    margin-bottom: var(--spacing-2);
+  }
+  
+  .slide-preview {
+    width: calc(100% - 460px);
+  }
+  
+  .slide-tools {
+    width: 220px;
+    margin-top: 0;
+  }
+  
+  /* עורך תוכן - ממשק מחשב */
+  .content-panel {
+    width: 220px;
+  }
+  
+  .editor-preview {
+    width: calc(100% - 460px);
+  }
+  
+  .element-properties {
+    width: 220px;
+    margin-top: 0;
+  }
+}
+
+/* ----- מחשב שולחני (1440px+) ----- */
+@media (min-width: 1440px) {
+  .templates-grid {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  }
+  
+  /* שיפור מרווחים */
+  .slide-preview, .editor-preview {
+    width: calc(100% - 500px);
+  }
+  
+  /* שיפור נראות בגרסה גדולה */
+  .slide-canvas {
+    width: 800px;
+    height: 450px;
+  }
+}
+
+/* ----- תמיכה במסכי רטינה (Retina support) ----- */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  /* אופטימיזציה לאייקונים ותמונות ברזולוציה גבוהה */
+  .logo i {
+    font-size: 1.05em; /* מניעת pixelation באייקונים */
+  }
+}
+
+/* ----- תמיכה במצב כהה (Dark mode) ----- */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary: #3b82f6;
+    --primary-light: rgba(59, 130, 246, 0.2);
+    
+    --neutral-50: #1a1a1a;
+    --neutral-100: #2a2a2a;
+    --neutral-200: #333333;
+    --neutral-300: #444444;
+    --neutral-400: #666666;
+    --neutral-700: #dddddd;
+    --neutral-800: #eeeeee;
+    --neutral-900: #ffffff;
+  }
+  
+  .modal, .slide-canvas, .slide-thumbnail, .template-card {
+    background-color: var(--neutral-100);
+  }
+  
+  .splash-container {
+    background: rgba(0, 0, 0, 0.3);
+  }
+  
+  img {
+    opacity: 0.9;
+  }
+}
+
+/* ----- תמיכה באוריינטציית מסך ----- */
+@media screen and (orientation: landscape) and (max-height: 600px) {
+  /* התאמות למצב landscape במכשירים ניידים */
+  .logo {
+    display: none;
+  }
+  
+  .splash-container {
+    padding: var(--spacing-4) var(--spacing-4);
+  }
+  
+  .progress-bar-container {
+    margin-bottom: var(--spacing-4);
+  }
+  
+  .step-title {
+    margin-bottom: var(--spacing-4);
+  }
+  
+  /* הקטנת פאנלים כדי לאפשר יותר מקום לתצוגה מקדימה */
+  .slides-panel, .slide-tools, .content-panel, .element-properties {
+    max-height: 40vh;
+  }
+}
+
+/* ----- תמיכה במגע (touch targets) ----- */
+@media (pointer: coarse) {
+  /* הגדלת אזורי מגע לאצבעות */
+  .btn, .tool-button, .control-button {
+    min-height: 48px;
+    min-width: 48px;
+  }
+  
+  .resize-handle {
+    width: 16px;
+    height: 16px;
+  }
+  
+  /* מרווח לרשימות צפופות */
+  .slides-list, .tools-row {
+    gap: var(--spacing-3);
+  }
+}
