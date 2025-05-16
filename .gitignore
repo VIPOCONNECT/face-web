@@ -1,0 +1,18 @@
+# קבצי מערכת
+.DS_Store
+Thumbs.db
+
+# קבצי IDE/עורכים
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# קבצים זמניים
+*.tmp
+*.log
+*.bak
+
+# קבצי node אם תשתמש בהם בעתיד
+node_modules/
+package-lock.json

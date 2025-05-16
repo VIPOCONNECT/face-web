@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>מערכת יצירת סרטונים</title>
+    <meta name="description" content="מערכת ליצירת סרטונים ומצגות מרהיבים בקלות ובמהירות">
+    
+    <!-- קישור לגופנים -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600;700&family=Heebo:wght@300;400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- קישור לקבצי CSS -->
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/components.css">
+    <link rel="stylesheet" href="styles/responsive.css">
+    
+    <!-- קישור לאייקונים -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- מסך פתיחה -->
+    <div id="splash-screen" class="screen active">
+        <div class="splash-container">
+            <div class="logo-container">
+                <div class="logo">
+                    <i class="fas fa-film"></i>
+                </div>
+                <h1 class="app-title">Video Creator</h1>
+            </div>
+            <p class="tagline">יצירת סרטונים מרהיבים בקלות ובמהירות</p>
+            
+            <div class="actions-container">
+                <button id="new-project-btn" class="btn btn-primary">
+                    <i class="fas fa-plus"></i>
+                    פרויקט חדש
+                </button>
+                <button id="load-project-btn" class="btn btn-outline">
+                    <i class="fas fa-folder-open"></i>
+                    טען פרויקט קיים
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- מערכת השלבים -->
+    <div id="steps-container" class="screen">
+        <!-- סרגל התקדמות -->
+        <div class="progress-bar-container">
+            <div class="progress-bar">
+                <div class="progress-fill"></div>
+                <div class="step-indicator active" data-step="1">1</div>
+                <div class="step-indicator" data-step="2">2</div>
+                <div class="step-indicator" data-step="3">3</div>
+                <div class="step-indicator" data-step="4">4</div>
+                <div class="step-indicator" data-step="5">5</div>
+            </div>
+        </div>
+        
+        <!-- תוכן השלבים -->
+        <div class="steps-content">
+            <!-- שלב 1: בחירת תבנית -->
+            <div id="step-template" class="step active" data-step="1">
+                <h2 class="step-title">בחר תבנית להתחלה</h2>
+                <div class="templates-grid">
+                    <!-- התבניות יטענו דינמית מה-JavaScript -->
+                </div>
+            </div>
+            
+            <!-- שלב 2: ניהול שקפים -->
+            <div id="step-slides" class="step" data-step="2">
+                <h2 class="step-title">ניהול שקפים</h2>
+                <div class="slide-management">
+                    <div class="slides-panel">
+                        <!-- רשימת שקפים -->
+                    </div>
+                    <div class="slide-preview">
+                        <!-- תצוגה מקדימה של שקף -->
+                    </div>
+                    <div class="slide-tools">
+                        <!-- כלים לשקף -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- שלב 3: עריכת תוכן -->
+            <div id="step-content" class="step" data-step="3">
+                <h2 class="step-title">הוספת וערכית תוכן</h2>
+                <div class="content-editor">
+                    <div class="content-panel">
+                        <!-- כלי עריכה -->
+                    </div>
+                    <div class="editor-preview">
+                        <!-- אזור עריכה -->
+                    </div>
+                    <div class="element-properties">
+                        <!-- מאפייני אלמנט -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- שלב 4: אנימציות ומעברים -->
+            <div id="step-animations" class="step" data-step="4">
+                <h2 class="step-title">אנימציות ומעברים</h2>
+                <div class="animations-editor">
+                    <div class="animation-preview">
+                        <!-- תצוגה מקדימה של שקף עם אנימציות -->
+                    </div>
+                    <div class="animations-panel">
+                        <!-- כלי עריכת אנימציות -->
+                    </div>
+                </div>
+            </div>
+            
+            <!-- שלב 5: תצוגה מקדימה וייצוא -->
+            <div id="step-preview" class="step" data-step="5">
+                <h2 class="step-title">תצוגה מקדימה וייצוא</h2>
+                <div class="preview-container">
+                    <!-- תצוגה מקדימה תיווצר דינמית -->
+                </div>
+                <div class="export-options">
+                    <button id="export-image-btn" class="btn btn-primary">
+                        <i class="fas fa-image"></i>
+                        ייצוא כתמונות
+                    </button>
+                    <button id="export-video-btn" class="btn btn-primary">
+                        <i class="fas fa-video"></i>
+                        ייצוא כסרטון
+                    </button>
+                    <button id="save-project-btn" class="btn btn-outline">
+                        <i class="fas fa-save"></i>
+                        שמירת פרויקט
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- כפתורי ניווט -->
+        <div class="steps-navigation">
+            <button class="btn btn-outline btn-prev" disabled>
+                <i class="fas fa-arrow-right"></i>
+                הקודם
+            </button>
+            <button class="btn btn-primary btn-next">
+                הבא
+                <i class="fas fa-arrow-left"></i>
+            </button>
+        </div>
+    </div>
+    
+    <!-- חלונות דיאלוג -->
+    <div id="modal-container" class="modal-container">
+        <!-- חלונות דיאלוג יווצרו דינמית -->
+    </div>
+    
+    <!-- סקריפטים לספריות חיצוניות -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    
+    <!-- סקריפטים לנתונים ואחסון -->
+    <script src="scripts/data/storage.js"></script>
+    <script src="scripts/data/project.js"></script>
+    <script src="scripts/data/templates.js"></script>
+    
+    <!-- סקריפטים לממשק משתמש -->
+    <script src="scripts/ui/steps.js"></script>
+    <script src="scripts/ui/template-selector.js"></script>
+    <script src="scripts/ui/slide-manager.js"></script>
+    <script src="scripts/ui/animations-manager.js"></script>
+    <script src="scripts/ui/preview-export.js"></script>
+    
+    <!-- סקריפט ראשי -->
+    <script src="scripts/app.js"></script>
+</body>
+</html>
