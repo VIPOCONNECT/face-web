@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="he">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>מערכת יצירת סרטון</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  <!-- תפריט עליון -->
+  <div class="menu-bar">
+    <button class="menu-button" onclick="showTemplates()"><i class="fas fa-th-large"></i> תבניות</button>
+    <button class="menu-button" onclick="showEffects()"><i class="fas fa-magic"></i> אפקטים</button>
+    <button class="menu-button" onclick="showTransitions()"><i class="fas fa-exchange-alt"></i> מעברים</button>
+    <button class="menu-button" id="editModeBtn" onclick="toggleEditMode()"><i class="fas fa-mouse-pointer"></i> עריכת מיקום</button>
+    <button class="menu-button" onclick="downloadHTML()"><i class="fas fa-download"></i> הורדה</button>
+    <button class="menu-button new-project-btn" onclick="newProject()"><i class="fas fa-plus"></i> פרויקט חדש</button>
+  </div>
+  
+  <!-- סרגל צד ימין - הגדרות שקף -->
+  <div class="sidebar">
+    <div class="app-header">
+      <div class="app-logo"><i class="fas fa-film"></i></div>
+      <h1 class="app-title">מערכת יצירת סרטון</h1>
+    </div>
+    
+    <div class="action-buttons">
+      <button onclick="newProject()" class="secondary"><i class="fas fa-plus"></i> פרויקט חדש</button>
+      <button onclick="addSlide()"><i class="fas fa-images"></i> הוסף שקף</button>
+      <button onclick="generatePreview()" class="full-width"><i class="fas fa-eye"></i> תצוגה מקדימה</button>
+      <button id="editModeBtn" onclick="toggleEditMode()" class="secondary"><i class="fas fa-mouse-pointer"></i> עריכת מיקום</button>
+      <button onclick="downloadHTML()" class="secondary full-width"><i class="fas fa-download"></i> הורד HTML</button>
+      <button onclick="showTemplates()" class="secondary"><i class="fas fa-palette"></i> תבניות מוכנות</button>
+      <button onclick="showTransitionEffects()" class="secondary"><i class="fas fa-magic"></i> אפקטי מעבר מתקדמים</button>
+    </div>
+    
+    <div class="section-title">שקפים</div>
+    <div id="slidesContainer"></div>
+  </div>
+  
+  <!-- תצוגה מקדימה -->
+  <div class="preview">
+    <iframe id="previewFrame"></iframe>
+  </div>
+  
+  <!-- סרגל פרויקטים -->
+  <div class="projects-toolbar">
+    <div class="projects-toolbar-header">
+      <h3>פרויקטים</h3>
+    </div>
+    <div class="projects-list" id="projectsList">
+      <!-- כאן יתווספו הפרויקטים באופן דינמי -->
+    </div>
+  </div>
+  
+  <!-- הגדרות שקף -->
+  <div class="slide-options">
+    <h3>אפשרויות שקף</h3>
+    <div>
+      <label>טקסט:</label>
+      <input type="text" class="slide-text" placeholder="הזן טקסט...">
+    </div>
+    <div>
+      <label>תמונת רקע:</label>
+      <input type="text" class="slide-image" placeholder="הזן כתובת URL של תמונה...">
+    </div>
+    <div>
+      <label>גופן:</label>
+      <select class="slide-font">
+        <option value="Arial">Arial</option>
+        <option value="Verdana">Verdana</option>
+        <option value="Tahoma">Tahoma</option>
+        <option value="Times New Roman">Times New Roman</option>
+        <option value="Courier New">Courier New</option>
+        <option value="David">David</option>
+      </select>
+    </div>
+    <div>
+      <label>גודל גופן:</label>
+      <input type="number" class="slide-font-size" value="24" min="10" max="100">
+    </div>
+    <div>
+      <label>צבע טקסט:</label>
+      <input type="color" class="slide-text-color" value="#ffffff">
+    </div>
+    <div>
+      <label>רקע לטקסט:</label>
+      <input type="checkbox" class="slide-has-bg">
+    </div>
+    <div class="bg-options" style="display:none;">
+      <div>
+        <label>צבע רקע:</label>
+        <input type="color" class="slide-bg-color" value="#000000">
+      </div>
+      <div class="bg-opacity-control">
+        <label>שקיפות רקע:</label>
+        <input type="range" class="slide-bg-opacity" min="0" max="1" step="0.1" value="0.5">
+        <span class="opacity-value">50%</span>
+      </div>
+    </div>
+    <div>
+      <label>מיקום טקסט:</label>
+      <select class="slide-position">
+        <option value="center">מרכז</option>
+        <option value="top">למעלה</option>
+        <option value="bottom">למטה</option>
+        <option value="left">שמאל</option>
+        <option value="right">ימין</option>
+        <option value="top-left">שמאל למעלה</option>
+        <option value="top-right">ימין למעלה</option>
+        <option value="bottom-left">שמאל למטה</option>
+        <option value="bottom-right">ימין למטה</option>
+        <option value="custom">מיקום מותאם אישית</option>
+      </select>
+    </div>
+    <div class="custom-position" style="display:none;">
+      <div>
+        <label>מיקום X (%):</label>
+        <input type="number" class="slide-pos-x" value="50" min="0" max="100">
+      </div>
+      <div>
+        <label>מיקום Y (%):</label>
+        <input type="number" class="slide-pos-y" value="50" min="0" max="100">
+      </div>
+    </div>
+    <div>
+      <label>אנימציית מעבר:</label>
+      <select class="slide-animation">
+        <option value="fade">הופעה הדרגתית</option>
+        <option value="slide-right">החלקה מימין</option>
+        <option value="slide-left">החלקה משמאל</option>
+        <option value="slide-up">החלקה מלמטה</option>
+        <option value="slide-down">החלקה מלמעלה</option>
+        <option value="zoom-in">התקרבות</option>
+        <option value="zoom-out">התרחקות</option>
+        <option value="rotate">סיבוב</option>
+        <option value="flip">היפוך</option>
+        <option value="bounce">קפיצה</option>
+      </select>
+    </div>
+    <div>
+      <label>אנימציית תמונה:</label>
+      <select class="slide-image-animation">
+        <option value="none">ללא</option>
+        <option value="pulse">פעימה</option>
+        <option value="float">ציפה</option>
+        <option value="shake">רעידה</option>
+        <option value="blur-in">טשטוש פנימה</option>
+        <option value="pan">תנועה אופקית</option>
+      </select>
+    </div>
+    <div>
+      <label>אנימציית טקסט:</label>
+      <select class="slide-text-animation">
+        <option value="none">ללא</option>
+        <option value="typing">הקלדה</option>
+        <option value="wave">גל</option>
+        <option value="glow">זוהר</option>
+        <option value="shadow-pop">צל קופץ</option>
+        <option value="rainbow">קשת בענן</option>
+        <option value="blur-in-text">טשטוש פנימה</option>
+        <option value="jump">קפיצה</option>
+        <option value="fade-in-chars">הופעה הדרגתית של תווים</option>
+      </select>
+    </div>
+    
+    <div class="section-title">אפשרויות אודיו</div>
+    <div>
+      <label>מוזיקת רקע:</label>
+      <select class="slide-background-music">
+        <option value="none">ללא מוזיקה</option>
+        <option value="upbeat">קצבי</option>
+        <option value="relaxing">רגוע</option>
+        <option value="dramatic">דרמטי</option>
+        <option value="corporate">עסקי</option>
+        <option value="happy">שמח</option>
+      </select>
+    </div>
+    <div>
+      <label>עוצמת מוזיקה:</label>
+      <input type="range" class="music-volume" min="0" max="1" step="0.1" value="0.5">
+      <span class="volume-value">50%</span>
+    </div>
+    <div>
+      <label>אפקטים קוליים:</label>
+      <select class="sound-effects">
+        <option value="none">ללא אפקטים</option>
+        <option value="transition">אפקט מעבר</option>
+        <option value="pop">פופ</option>
+        <option value="whoosh">וווש</option>
+        <option value="click">קליק</option>
+      </select>
+    </div>
+  </div>
+  
+  <!-- תבניות מוכנות מראש -->
+  <div id="templatesModal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h2>תבניות מוכנות מראש</h2>
+      <div class="templates-grid">
+        <div class="template-item" data-template="business">
+          <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40" alt="עסקי">
+          <div class="template-title">עסקי</div>
+        </div>
+        <div class="template-item" data-template="education">
+          <img src="https://images.unsplash.com/photo-1503676260728-1c00da094a0b" alt="חינוכי">
+          <div class="template-title">חינוכי</div>
+        </div>
+        <div class="template-item" data-template="creative">
+          <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f" alt="יצירתי">
+          <div class="template-title">יצירתי</div>
+        </div>
+        <div class="template-item" data-template="nature">
+          <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05" alt="טבע">
+          <div class="template-title">טבע</div>
+        </div>
+        <div class="template-item" data-template="travel">
+          <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800" alt="טיולים">
+          <div class="template-title">טיולים</div>
+        </div>
+        <div class="template-item" data-template="food">
+          <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836" alt="אוכל">
+          <div class="template-title">אוכל</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- אפקטי מעבר מתקדמים -->
+  <div id="transitionEffectsModal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h2>אפקטי מעבר מתקדמים</h2>
+      <div class="effects-grid">
+        <div class="effect-item" data-effect="3d-flip">
+          <div class="effect-preview">3D</div>
+          <div class="effect-title">היפוך תלת מימדי</div>
+        </div>
+        <div class="effect-item" data-effect="shatter">
+          <div class="effect-preview"><i class="fas fa-puzzle-piece"></i></div>
+          <div class="effect-title">התנפצות</div>
+        </div>
+        <div class="effect-item" data-effect="wipe">
+          <div class="effect-preview"><i class="fas fa-hand-sparkles"></i></div>
+          <div class="effect-title">מחיקה</div>
+        </div>
+        <div class="effect-item" data-effect="dissolve">
+          <div class="effect-preview"><i class="fas fa-wind"></i></div>
+          <div class="effect-title">המסה</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <script src="script.js"></script>
+</body>
+</html>
